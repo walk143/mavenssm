@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+    <!--Springmvc的配置文件一般有适配器配置，映射器配置和视图解析器配置。但是，因为开启注解模式，这边映射器和适配器可以不用配置。最上方为扫描器，所有被@Controller修饰的类都只能写在扫描器扫描的文件将夹下并且告诉系统只扫描@Controller注解(这样做是为了不扫描@Service和@Repository注解)，-->
+    <!--<mvc:annotation-driven/>是告诉系统使用了注解模式，-->
+    <!--<mvc:default-servlet-handler/>是静态资源默认servlet配置，因为我们在web.xml中配置spring拦截所有-->
+    <!--<url-pattern>/</url-pattern>请求而不是*.do形式的请求，如果这里不配置的话Spring也会拦截静态资源，最后是关于视图解析器的配置，这里不配置视图解析器的后缀是为了代码更加灵活，可以选着返回*.html或者*.jsp文件。-->
+
+    <!-- 自动扫描的包名,只扫描@Controller -->
+    <context:component-scan base-package="com.sloera" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 开启SpringMVC注解模式 -->
+    <mvc:annotation-driven/>
+
+    <!-- 静态资源默认servlet配置 -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=""/>
+    </bean>
+
+</beans>
