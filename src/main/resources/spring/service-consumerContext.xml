@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://code.alibabatech.com/schema/dubbo        
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd 
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+<!--    &lt;!&ndash; 加载高速服务配置文件 &ndash;&gt;-->
+<!--    <context:property-placeholder location="classpath:config/jservice.properties" ignore-unresolvable="true"/>-->
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="Sloera.MavenSSM"/>
+<!--	&lt;!&ndash; 使用zookeeper广播注册中心暴露发现服务地址 &ndash;&gt;-->
+<!--	<dubbo:registry protocol="${hsf.protocol}" address="${hsf.servers}" timeout="${hsf.timeout}"/>-->
+<!--	<dubbo:protocol name="dubbo" port="20882" />-->
+<!--	&lt;!&ndash; 用户权限服务 &ndash;&gt;-->
+<!--	<dubbo:reference id="userAuthorityService" interface="com.inspur.service.UserAuthorityService"  group="bsp" timeout="50000"/>-->
+<!--	<dubbo:reference id="applicationService" interface="com.inspur.service.ApplicationService" group="bsp" timeout="50000"/>-->
+<!--	<dubbo:reference interface="com.inspur.service.OrganizationService"  id="organizationService"  group="bsp" timeout="50000"/>-->
+<!--	&lt;!&ndash; 政务服务门户的对接 &ndash;&gt;-->
+<!--	<dubbo:reference interface="com.inspur.service.MessageService" id="msgService"  group="msg" check="false" timeout="50000"/>-->
+<!--	&lt;!&ndash; 生成远程服务代理，可以和本地bean一样使用bpmService &ndash;&gt;-->
+<!--	<dubbo:reference id="bpmService" interface="com.inspur.service.BpmService" group="bpm"/>-->
+<!--	<dubbo:reference id="approveService" interface="com.inspur.service.PowerManagerService" group="powermanager" timeout="50000"/>-->
+<!--	<dubbo:reference id="formService" interface="com.inspur.service.FormService" group="bsp"/>-->
+<!--	<dubbo:reference id="smsService" interface="com.inspur.service.SMS.service.SmsService" check="false" group="YSL" timeout="50000"/>-->
+<!--	<dubbo:reference id="uniteArchiveService" interface="com.inspur.service.UniteArchiveService" group="arch" check="false" timeout="50000"/>-->
+<!--	<dubbo:reference id="smartApproveService" interface="com.inspur.service.DocumentCheckService" group="docheck" check="false" timeout="50000" />-->
+<!--	&lt;!&ndash; 公共平台服务  Start -->
+<!--   <dubbo:service interface="com.inspur.service.BusinessApprovalService"  ref="businessApprovalService"  group="XZSP"/>-->
+<!--	<bean id="businessApprovalService" class="com.inspur.service.impl.BusinessApprovalServiceImpl">-->
+<!--	</bean>	 &ndash;&gt;-->
+<!--	&lt;!&ndash; 公共平台服务End&ndash;&gt;-->
+<!--	&lt;!&ndash; 审批到监察数据推送服务 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalExChangeService"  ref="approvalExChangeService"  />-->
+<!--	<bean id="approvalExChangeService" class="com.inspur.service.impl.ApprovalExChangeServiceImpl">-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 审批到监察数据推送服务 End &ndash;&gt;-->
+<!--	&lt;!&ndash; 审批到监察数据推送服务 天河 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalExChangeServiceTH"  ref="approvalExChangeServiceTH"  />-->
+<!--	<bean id="approvalExChangeServiceTH" class="com.inspur.service.impl.ApprovalExChangeServiceTHImpl">-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 审批到监察数据推送服务 End &ndash;&gt;-->
+<!--	&lt;!&ndash; 索引文件更新 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalSearchIndex"  ref="approvalSearchIndex"  />-->
+<!--	<bean id="approvalSearchIndex" class="com.inspur.service.impl.ApprovalSearchIndexImpl">-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 索引文件更新 End &ndash;&gt;-->
+<!--	&lt;!&ndash;  审批定时归档服务  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalArchiveService"  ref="approvalArchiveService" />-->
+<!--	<bean id="approvalArchiveService"  class="com.inspur.service.impl.ApprovalArchiveServiceImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 审批定时归档服务  End&ndash;&gt;-->
+<!--	&lt;!&ndash; 审批定时星级评价表写数据（大庆）  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalOnLineStarRatingService"  ref="approvalOnLineStarRatingService" />-->
+<!--	<bean id="approvalOnLineStarRatingService"  class="com.inspur.service.impl.ApprovalOnLineStarRatingServiceImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 审批定时星级评价表写数据   End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时更新统计信息表（舟山）  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.StatisticsInfoService"  ref="approvalStatisticsInfoService" />-->
+<!--	<bean id="approvalStatisticsInfoService"  class="com.inspur.service.impl.StatisticsInfoServiceImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 审批定时更新统计信息表   End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时-廊坊审批数据上报定时服务（廊坊）  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalLFReportService"  ref="approvalLFReportService" />-->
+<!--	<bean id="approvalLFReportService"  class="com.inspur.service.impl.ApprovalLFReportServiceImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 廊坊审批数据上报定时服务   End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时-云南审批数据交换定时服务-读中间库（云南）  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalYNExChangeService"  ref="approvalYNExChangeService" />-->
+<!--	<bean id="approvalYNExChangeService"  class="com.inspur.service.impl.ApprovalYNExChangeServiceImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 云南审批数据交换定时服务   End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时自动恢复公示挂起业务  Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.AutoEndSuspendService"  ref="approvalAutoEndSuspendService" />-->
+<!--	<bean id="approvalAutoEndSuspendService"  class="com.inspur.service.impl.AutoEndSuspendImpl" >-->
+<!--	</bean> -->
+<!--	&lt;!&ndash; 审批定时自动恢复公示挂起业务   End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时-济南大厅办结业务推送  Start-->
+<!--	<dubbo:service interface="com.inspur.service.ShandongPushFinishBusiness"  ref="shandongPushFinishBusiness" />-->
+<!--	<bean id="shandongPushFinishBusiness"  class="com.inspur.service.impl.ShandongPushFinishBusinessImpl" >-->
+<!--	</bean> -->
+<!--	审批定时-济南大厅办结业务推送   End&ndash;&gt;-->
+<!--	&lt;!&ndash; 西宁数据对接 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalXNExChangeService"  ref="approvalXNExChangeService"  />-->
+<!--	<bean id="approvalXNExChangeService" class="com.inspur.service.impl.ApprovalXNExChangeServiceImpl">-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 西宁数据对接 End &ndash;&gt;-->
+<!--	&lt;!&ndash; 山东互联互通 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.SDHLHTExChangeService"  ref="sdhlhtExChangeService"  />-->
+<!--	<bean id="sdhlhtExChangeService" class="com.inspur.service.impl.SDHLHTExChangeServiceImpl">-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 山东互联互通 End &ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 审批定时给预警超时业务的当前环节办理人发送短信 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.SendWarningMessageService" ref="approvalSendWarningMessageService" />-->
+<!--	<bean id="approvalSendWarningMessageService" class="com.inspur.service.impl.SendWarningMessageImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 审批定时给预警超时业务的当前环节办理人发送短信 End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 德州接收评价回复短信服务 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ReceiveMessageService" ref="approvalReceiveMessageService" />-->
+<!--	<bean id="approvalReceiveMessageService" class="com.inspur.service.impl.ReceiveMessageImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 德州接收评价回复短信服务 End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 三亚推送许可公示信息服务 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.SendPublicityInfoService" ref="approvalSendPublicityInfoService" />-->
+<!--	<bean id="approvalSendPublicityInfoService" class="com.inspur.service.impl.SendPublicityInfoServiceImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 三亚推送许可公示信息服务 End&ndash;&gt;-->
+
+<!--	&lt;!&ndash; 德州 超过24小时自动作废外网预约业务 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.AutoVoidService" ref="approvalAutoVoidService" />-->
+<!--	<bean id="approvalAutoVoidService" class="com.inspur.service.impl.AutoVoidImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash;德州 超过24小时自动作废外网预约业务 End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 三亚 监督监察——业务查询，业务排序按剩余工作日进行排序 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalSanYaSuperviseService" ref="approvalSanYaSuperviseService" />-->
+<!--	<bean id="approvalSanYaSuperviseService" class="com.inspur.service.impl.ApprovalSanYaSuperviseServiceImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 三亚 监督监察——业务查询，业务排序按剩余工作日进行排序 End&ndash;&gt;-->
+<!--	-->
+<!--	&lt;!&ndash; 沈阳市和平区业务数据获取服务 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalExchangeShenyangService" ref="approvalExchangeShenyangService" />-->
+<!--	<bean id="approvalExchangeShenyangService" class="com.inspur.service.impl.ApprovalExchangeShenyangServiceImpl" >-->
+<!--	</bean>-->
+<!--	&lt;!&ndash; 沈阳市和平区业务数据获取服务 End&ndash;&gt;-->
+
+<!--	&lt;!&ndash; 贵州监察数据交换到前置库 Start&ndash;&gt;-->
+<!--	<dubbo:service interface="com.inspur.service.ApprovalGuiYangMonitorService" ref="approvalGuiYangMonitorService" />-->
+<!--	<bean id="approvalGuiYangMonitorService" class="com.inspur.service.impl.ApprovalGuiYangMonitorServiceImpl"></bean>-->
+	<!-- 贵州监察数据交换到前置库 End-->
+</beans>

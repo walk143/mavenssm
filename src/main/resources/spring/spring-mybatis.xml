@@ -20,7 +20,7 @@
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <!-- 数据库连接池 -->
-    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+    <!--<bean id="dataSource" class="mappers.mchange.v2.c3p0.ComboPooledDataSource">-->
         <!--<property name="driverClass" value="${jdbc.driver}"/>-->
         <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
         <!--<property name="user" value="${jdbc.username}"/>-->
@@ -37,7 +37,7 @@
         <!--&lt;!&ndash; 注入数据库连接池 &ndash;&gt;-->
         <!--&lt;!&ndash;<property name="dataSource" ref="dataSource"/>&ndash;&gt;-->
         <!--&lt;!&ndash; 扫描model包 使用别名 &ndash;&gt;-->
-        <!--<property name="typeAliasesPackage" value="com.test.model"/>-->
+        <!--<property name="typeAliasesPackage" value="mappers.test.model"/>-->
         <!--&lt;!&ndash; 扫描sql配置文件:mapper需要的xml文件 &ndash;&gt;-->
         <!--<property name="mapperLocations" value="classpath:sqlmap/*"/>-->
     <!--</bean>-->
@@ -47,7 +47,7 @@
         <!--&lt;!&ndash; 注入sqlSessionFactory &ndash;&gt;-->
         <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
         <!--&lt;!&ndash; 给出需要扫描Dao接口包 &ndash;&gt;-->
-        <!--<property name="basePackage" value="com.sloera.springmvc.dao"/>-->
+        <!--<property name="basePackage" value="mappers.sloera.springmvc.dao"/>-->
     <!--</bean>-->
 
 </beans>
