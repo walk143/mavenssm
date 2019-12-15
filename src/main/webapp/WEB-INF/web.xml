@@ -63,12 +63,12 @@
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
-    <!--&lt;!&ndash; Spring配置 &ndash;&gt;-->
-    <!--<listener>-->
-    <!--<listener-class>-->
-    <!--org.springframework.web.context.ContextLoaderListener-->
-    <!--</listener-class>-->
-    <!--</listener>-->
+    <!-- Spring配置 -->
+<!--    <listener>-->
+<!--    <listener-class>-->
+<!--    org.springframework.web.context.ContextLoaderListener-->
+<!--    </listener-class>-->
+<!--    </listener>-->
     <!--&lt;!&ndash; 取消对某一类文件的拦截&ndash;&gt;-->
     <!--<servlet-mapping>-->
     <!--<servlet-name>default</servlet-name>-->
@@ -79,10 +79,10 @@
     <!--<param-name>contextConfigLocation</param-name>-->
     <!--<param-value> classpath:spring/application-context.xml</param-value>-->
     <!--</context-param>-->
-    <!--&lt;!&ndash; 欢迎页面&ndash;&gt;-->
-    <!--<welcome-file-list>-->
-    <!--<welcome-file>/WEB-INF/index.jsp</welcome-file>-->
-    <!--</welcome-file-list>-->
+    <!-- 欢迎页面-->
+    <welcome-file-list>
+    <welcome-file>/WEB-INF/default.html</welcome-file>
+    </welcome-file-list>
     <!--404错误展示页面，可自行配置-->
     <error-page>
         <!-- 路径不正确 -->
@@ -92,12 +92,12 @@
     <error-page>
         <!-- 没有访问权限，访问被禁止 -->
         <error-code>405</error-code>
-        <location>/WEB-INF/pages/error/405.jsp</location>
+        <location>/WEB-INF/pages/error/405.html</location>
     </error-page>
     <error-page>
         <!-- 内部错误 -->
         <error-code>500</error-code>
-        <location>/WEB-INF/pages/error/500.jsp</location>
+        <location>/WEB-INF/pages/error/500.html</location>
     </error-page>
     <!--设置session失效时间为30分钟 -->
     <session-config>

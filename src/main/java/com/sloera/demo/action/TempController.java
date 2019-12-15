@@ -17,6 +17,7 @@ public class TempController {
     public String index(HttpServletResponse response){
         System.out.println("index");
         System.out.println(tempService.test("hello"));
-        return "default";
+//        return "default";
+        return "test";
     }
 }

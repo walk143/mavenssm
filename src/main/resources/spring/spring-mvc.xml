@@ -31,10 +31,11 @@
     <mvc:default-servlet-handler/>
 
     <!-- 配置jsp 显示ViewResolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value="html"/>
-    </bean>
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="prefix" value="/WEB-INF/pages/"/>-->
+<!--        <property name="suffix" value="html"/>-->
+<!--    </bean>-->
+<!--    -->
 
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.sloera.web" />
@@ -70,4 +71,15 @@
             </list>
         </property>
     </bean>
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/pages"></property>
+        <property name="defaultEncoding" value="utf-8"></property>
+
+    </bean>
+    <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="order" value="0"></property>
+    </bean>
+
 </beans>
