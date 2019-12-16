@@ -297,21 +297,18 @@
             <version>2.3.29</version>
         </dependency>
 
-<!--        aop-->
+        <!--        aop-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.10</version>
         </dependency>
-<!--先借用-->
+        <!--先借用-->
         <dependency>
             <groupId>in-project</groupId>
             <artifactId>ibatis</artifactId>
             <version>3.2</version>
         </dependency>
-
-
-
 
 
     </dependencies>

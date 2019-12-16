@@ -1,22 +1,17 @@
 package com.sloera.demo.service;
 
-import com.sloera.demo.bean.Demo;
-import com.sloera.demo.bean.Form;
 import com.sloera.demo.dao.DemoDao;
+import com.sloera.demo.po.TempBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Created by myzha on 2019/7/3.
  */
 @Service("demoService")
-@Transactional( rollbackFor = {Exception.class, RuntimeException.class})
+@Transactional(rollbackFor = {Exception.class, RuntimeException.class})
 public class DemoService {
     private static Logger logger = Logger.getLogger(DemoService.class);
     //@Autowired
@@ -44,11 +39,12 @@ public class DemoService {
     @Autowired
     private DemoDao demoDao;
 
-    public void save(Demo demo)  throws Exception{
-        this.demoDao.save("com.inspur.person.insertTest", demo);//保存
+    public int save(TempBean tempBean) throws Exception {
+        return this.demoDao.save("com.sloera.demo.insertTest", tempBean);//保存
     }
-    public void update(Demo demo)throws Exception {
-        this.demoDao.update("com.inspur.person.updatePerson", demo);//编辑
+
+    public int update(TempBean tempBean) throws Exception {
+        return this.demoDao.update("com.sloera.demo.updateTest", tempBean);//编辑
     }
     //public PersonBean findById(String seqId) {
     //    List<PersonBean> list=personDao.selectList("com.inspur.person.getPerson",seqId);

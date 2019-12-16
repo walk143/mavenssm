@@ -9,7 +9,7 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.3.xsd
          http://www.springframework.org/schema/mvc
-         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd"  >
+         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
     <!--&lt;!&ndash; ①：对com.springmvc包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 &ndash;&gt;-->
     <!--<context:component-scan base-package="mappers.springmvc"/>-->
@@ -32,7 +32,8 @@
         </property>
     </bean>
 
-    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
@@ -41,18 +42,13 @@
     </bean>
 
 
-
-
-
     <!--&lt;!&ndash; 配置视图解析器，把控制器的逻辑视频映射为真正的视图 &ndash;&gt;-->
     <!--&lt;!&ndash; /WEB-INF/jsp/start.jsp &ndash;&gt;-->
-<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-<!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-<!--        <property name="prefix" value="/WEB-INF/pages/" />-->
-<!--        <property name="suffix" value=".html" />-->
-<!--    </bean>-->
-
-
+    <!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+    <!--        <property name="prefix" value="/WEB-INF/pages/" />-->
+    <!--        <property name="suffix" value=".html" />-->
+    <!--    </bean>-->
 
 
     <!--&lt;!&ndash; 配置dbcp数据库连接池 &ndash;&gt;-->
@@ -60,35 +56,59 @@
     <!--&lt;!&ndash; <context:property-placeholder location="classpath:db.properties"/> &ndash;&gt;-->
     <!--&lt;!&ndash;数据库配置 &ndash;&gt;-->
     <!--<bean id = "propertyConfigurer" class = "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--<value>classpath:jdbc.properties</value>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name="locations">-->
+    <!--<list>-->
+    <!--<value>classpath:jdbc.properties</value>-->
+    <!--</list>-->
+    <!--</property>-->
 
     <!--</bean>-->
 
     <!--&lt;!&ndash; 数据库连接池 &ndash;&gt;-->
     <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-        <!--<property name="driverClassName" value="${driver}"/>-->
-        <!--<property name="url" value="${url}"/>-->
-        <!--<property name="username" value="${username}"/>-->
-        <!--<property name="password" value="${password}"/>-->
-        <!--<property name="initialSize" value="1"/>-->
-        <!--<property name="maxActive" value="100"/>-->
-        <!--<property name="maxIdle" value="5"/>-->
-        <!--<property name="maxWait" value="80000"/>-->
+    <!--<property name="driverClassName" value="${driver}"/>-->
+    <!--<property name="url" value="${url}"/>-->
+    <!--<property name="username" value="${username}"/>-->
+    <!--<property name="password" value="${password}"/>-->
+    <!--<property name="initialSize" value="1"/>-->
+    <!--<property name="maxActive" value="100"/>-->
+    <!--<property name="maxIdle" value="5"/>-->
+    <!--<property name="maxWait" value="80000"/>-->
     <!--</bean>-->
+
+    <!-- 数据库配置文件 -->
+    <import resource="classpath:spring/spring-jdbc.xml"/>
+    <!-- session factory -->
+    <bean id="masterSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="masterDataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml"/>
+    </bean>
+    <bean id="slaveSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="masterDataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml"/>
+    </bean>
+    <!-- [master:] sql session template -->
+    <bean id="masterSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="masterSqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
+    </bean>
+    <!-- [slave:] sql session template -->
+    <bean id="slaveSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="slaveSqlSessionFactory"/>
+        <constructor-arg index="1" value="BATCH"/>
+    </bean>
 
     <!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->
     <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
+    <!--<property name="dataSource" ref="dataSource" />-->
     <!--</bean>-->
 
     <!--&lt;!&ndash; 拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash; 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 &ndash;&gt;-->
-        <!--<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />-->
+    <!--&lt;!&ndash; 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />-->
     <!--</mvc:interceptors>-->
     <!--&lt;!&ndash; 定义无Controller的path<->view直接映射 &ndash;&gt;-->
     <!--&lt;!&ndash; <mvc:view-controller path="/" view-name="redirect:/" /> &ndash;&gt;-->
@@ -96,22 +116,22 @@
     <!--&lt;!&ndash; 配置会话工厂SqlSessionFactory &ndash;&gt;-->
 
     <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
-        <!--&lt;!&ndash; 数据源 &ndash;&gt;-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--<property name="mapperLocations" value="classpath:sqlmap/*Mapper.xml"/>-->
-        <!--<property name="typeAliasesPackage" value="mappers.springmvc.entity" />-->
+    <!--&lt;!&ndash; 数据源 &ndash;&gt;-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--<property name="mapperLocations" value="classpath:sqlmap/*Mapper.xml"/>-->
+    <!--<property name="typeAliasesPackage" value="mappers.springmvc.entity" />-->
 
     <!--</bean>-->
 
     <!--&lt;!&ndash; 在spring容器中配置mapper的扫描器产生的动态代理对象在spring的容器中自动注册，bean的id就是mapper类名（首字母小写）&ndash;&gt;-->
     <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
-        <!--&lt;!&ndash; 指定扫描包的路径，就是mapper接口的路径，多个包中间以 半角逗号隔开   &ndash;&gt;-->
-        <!--<property name="basePackage" value="mappers.springmvc.dao"/>-->
-        <!--&lt;!&ndash; 配置sqlSessionFactoryBeanName &ndash;&gt;-->
-        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--&lt;!&ndash; 指定扫描包的路径，就是mapper接口的路径，多个包中间以 半角逗号隔开   &ndash;&gt;-->
+    <!--<property name="basePackage" value="mappers.springmvc.dao"/>-->
+    <!--&lt;!&ndash; 配置sqlSessionFactoryBeanName &ndash;&gt;-->
+    <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
     <!--</bean>-->
 
-<!--    用于后面的$引用-->
+    <!--    用于后面的$引用-->
     <context:property-placeholder location="classpath:constant.properties" ignore-unresolvable="true"/>
     <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
         <property name="supportedMediaTypes">
@@ -143,34 +163,34 @@
         </property>
     </bean>
     <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
         <property name="contentType" value="text/html;charset=UTF-8"></property>
-        <property name="prefix" value="" />
+        <property name="prefix" value=""/>
         <property name="suffix" value=".html"></property>
         <property name="order" value="0"></property>
-        <property name="cache" value="true" />
-        <property name="requestContextAttribute" value="request" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="exposeRequestAttributes" value="false" />
-        <property name="exposeSessionAttributes" value="false" />
+        <property name="cache" value="true"/>
+        <property name="requestContextAttribute" value="request"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="exposeRequestAttributes" value="false"/>
+        <property name="exposeSessionAttributes" value="false"/>
     </bean>
 
     <!-- freemarker configuration -->
     <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:freemarker.properties" />
+        <property name="location" value="classpath:freemarker.properties"/>
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="defaultEncoding" value="utf-8" />
-        <property name="maxUploadSize" value="5368709120" /><!-- 上传文件大小限制为5G，5*1024*1024*1024 -->
-        <property name="maxInMemorySize" value="4096" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="5368709120"/><!-- 上传文件大小限制为5G，5*1024*1024*1024 -->
+        <property name="maxInMemorySize" value="4096"/>
     </bean>
 
     <!-- 异常处理 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="defaultErrorView" value="error/404" />
-        <property name="defaultStatusCode" value="404" />
-        <property name="exceptionAttribute" value="exception" />
+        <property name="defaultErrorView" value="error/404"/>
+        <property name="defaultStatusCode" value="404"/>
+        <property name="exceptionAttribute" value="exception"/>
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.Exception">error/expected</prop>
@@ -183,7 +203,7 @@
 
     <!-- 样式CSS映射 -->
     <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
-        <property name="basenamePrefix" value="theme." />
+        <property name="basenamePrefix" value="theme."/>
     </bean>
 
 </beans>

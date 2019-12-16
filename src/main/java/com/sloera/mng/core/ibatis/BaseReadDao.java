@@ -11,16 +11,15 @@ import java.util.Map;
 
 public class BaseReadDao<E> {
     static final Object[] object = new Object[0];
-    // TODO: 2019-12-16 数据库 
-    //@Autowired
-    //@Qualifier("slaveSqlSessionTemplate")
-    //public SqlSessionTemplate slaveSqlSessionTemplate;
+    @Autowired
+    @Qualifier("slaveSqlSessionTemplate")
+    public SqlSessionTemplate slaveSqlSessionTemplate;
 
     public BaseReadDao(){};
 
     private SqlSession getSession(SqlSessionTemplate var1, boolean var2) {
-        //return (SqlSession) (var1 == null ? this.slaveSqlSessionTemplate : var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
-        return (SqlSession) (var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
+        return (SqlSession) (var1 == null ? this.slaveSqlSessionTemplate : var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
+//        return (SqlSession) (var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
     }
     //未传入数据库链接
     public <E>List<E> selectList(String var1, Object var2){
