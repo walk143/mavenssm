@@ -111,5 +111,79 @@
         <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
     <!--</bean>-->
 
+<!--    用于后面的$引用-->
+    <context:property-placeholder location="classpath:constant.properties" ignore-unresolvable="true"/>
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>application/xhtml+xml;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="${app.pages.path:/WEB-INF/pages/}"></property>
+        <property name="defaultEncoding" value="utf-8"></property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="template_update_delay">2</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="output_encoding">UTF-8</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="number_format">0.##</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">com.sloera.mng.core.error.FreemarkerException</prop>
+                <prop key="auto_import">/common/ftl/webfinal.ftl as webfinal,/common/ftl/website.ftl as website</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="prefix" value="" />
+        <property name="suffix" value=".html"></property>
+        <property name="order" value="0"></property>
+        <property name="cache" value="true" />
+        <property name="requestContextAttribute" value="request" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="false" />
+        <property name="exposeSessionAttributes" value="false" />
+    </bean>
+
+    <!-- freemarker configuration -->
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freemarker.properties" />
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="maxUploadSize" value="5368709120" /><!-- 上传文件大小限制为5G，5*1024*1024*1024 -->
+        <property name="maxInMemorySize" value="4096" />
+    </bean>
+
+    <!-- 异常处理 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error/404" />
+        <property name="defaultStatusCode" value="404" />
+        <property name="exceptionAttribute" value="exception" />
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">error/expected</prop>
+                <prop key="java.lang.Throwable">error/unexpected</prop>
+                <prop key="com.inspur.mng.core.error.SessionException">error/session</prop>
+                <prop key="com.inspur.mng.core.error.FreemarkerException">error/ftl</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 样式CSS映射 -->
+    <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+        <property name="basenamePrefix" value="theme." />
+    </bean>
 
 </beans>
