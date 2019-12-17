@@ -11,25 +11,28 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class MainController extends BaseController {
-    @RequestMapping(value = "/main",method = RequestMethod.GET)
-    public String home(HttpServletResponse response){
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String home(HttpServletResponse response) {
         try {
             String type = this.getPara("type");
             String query = request.getQueryString();
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e);
         }
         return login(response);
     }
+
     /*
-    * @Description 用户请求登录
-    * @Return 页面
-    * @Author liuwangyang
-    * @Date 2019-12-14 11:38
-    */
+     * @Description 用户请求登录
+     * @Return 页面
+     * @Author liuwangyang
+     * @Date 2019-12-14 11:38
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletResponse response){
+    public String login(HttpServletResponse response) {
         Record record = (Record) WebUtils.getSessionAttribute(request, BaseController.USER_TOCKEN);
+        String root = this.getCdnURL(request);
+        request.setAttribute("command", root + "/main");
         return "login";
     }
 }

@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseController {
     public Logger logger = Logger.getLogger(this.getClass());
     public static final String USER_TOCKEN = "_Invalidate_Session_Token_";
+    public String SYSTEM_CDN = "localhost";
 
     @Resource
     public HttpServletRequest request;
-    public BaseController(){
+
+    public BaseController() {
     }
 
-    public String getPara(String name){
+    public String getPara(String name) {
         String str = this.request.getParameter(name);
-        if(StringUtils.isNotBlank(str)){
+        if (StringUtils.isNotBlank(str)) {
             str = str.trim();
         }
         //处理字符
@@ -28,5 +30,27 @@ public abstract class BaseController {
         str = HtmlUtils.htmlEscape(str);
         str = JavaScriptUtils.javaScriptEscape(str);
         return str;
+    }
+
+    public String getCdnURL(HttpServletRequest request) {
+        String cdn = this.SYSTEM_CDN;
+        if (cdn.indexOf("localhost") != -1) {
+            String url = this.getContextPath(request);
+            if (url.endsWith("/")) {
+                url = url.substring(0, url.length() - 1);
+            }
+            return url;
+        }else {
+            // TODO: 2019/12/17 cdn页面 
+            return "";
+        }
+    }
+
+    public String getContextPath(HttpServletRequest request) {
+        String path = request.getContextPath();
+        String basePath =
+                request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+        logger.error("basePath:" + basePath);
+        return basePath;
     }
 }

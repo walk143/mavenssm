@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
     <head>
         <meta charset="UTF-8">
         <title>${title!}</title>
@@ -7,6 +7,49 @@
     <body>
         <#include "login/header.html"/>
         <p>这是一个登录界面</p>
+        <div class="container">
+            <form class="form-login" id="loginForm" method="post" action="${command!}"
+                  data-validator-option="{stopOnError:true}">
+                <p>
+                    <label class="label-text">登录账号：</label>
+
+                    <input type="text" class="input-text" value="" name="userName" id="userName" placeholder="请输入账号"
+                           data-rule="登录账号:required;" autocomplete="off"/>
+                </p>
+                <p>
+                    <label class="label-text">登录密码：</label>
+
+                    <input type="text" class="input-text" value="" name="password" id="password" placeholder="请输入密码"
+                           data-rule="登录密码:required;" autocomplete="off"/>
+                </p>
+                <p>
+                    <button type="submit" id="btnLogin" class="btn btn-login">登录</button>
+                </p>
+            </form>
+        </div>
         <#include "login/footer.html"/>
     </body>
+
+    <script src="${root!}/static/js/jquery/jquery-1.7.2.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="${root!}/static/js/login/js/jquery.carouFredSel-6.2.1.js"></script>
+    <script src="${root!}/static/js/login/js/jquery.carouselCall.js"></script>
+    <script src="${root!}/static/js/login/js/calogin.js"></script>
+    <script src="${root!}/static/js/login/jquery.validator.js"></script>
+    <script src="${root!}/static/js/jquery/jquery.md5.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.form-login').validator({
+            valid:function (form) {
+                $("#password").val($.md5($("#password").val())) // 密码md5加密
+                $("#username").val(encrypt(encodeURIComponent($("#username").val())));
+                $("#password").val(encrypt(encodeURIComponent($("#password").val())));
+                form.submit();
+            }
+        })
+       function encrypt(word){
+            return word;
+       }
+    });
+</script>
 </html>
