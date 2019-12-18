@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sloera.person.user.userInfo">
+    <resultMap type="com.sloera.person.user.po.UserBean" id="user">
+        <id column="ID" property="id" />
+        <result column="USERNAME" property="userName" />
+        <result column="ACCOUNT" property="account" />
+        <result column="PASSWORD" property="password" />
+        <result column="AGE" property="age" jdbcType="INTEGER"/>
+        <result column="SEX" property="sex" />
+        <result column="EMAIL" property="email" />
+        <result column="VERSION" property="version" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="findByAccount" resultMap="user">
+        select id, username, account, password, age, sex, email, version from USER_INFO u
+        where u.id = #{id}
+    </select>
+</mapper>
