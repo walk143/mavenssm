@@ -8,18 +8,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 
 @Controller
 public class MainController extends BaseController {
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.POST)
     public String home(HttpServletResponse response) {
         try {
             String type = this.getPara("type");
+            String userName = this.getPara("userName");
+            userName = URLDecoder.decode(userName,"UTF-8");
+            String password = this.getPara("password");
+            password = URLDecoder.decode(password,"UTF-8");
             String query = request.getQueryString();
         } catch (Exception e) {
             logger.error(e);
         }
-        return login(response);
+//        return login(response);
+        return defaultHtmlUrl();
     }
 
     /*
@@ -33,6 +39,11 @@ public class MainController extends BaseController {
         Record record = (Record) WebUtils.getSessionAttribute(request, BaseController.USER_TOCKEN);
         String root = this.getCdnURL(request);
         request.setAttribute("command", root + "/main");
+        request.setAttribute("root", root );
         return "login";
+    }
+    private String defaultHtmlUrl(){
+        String defaultHtmlUrl = "index";
+        return defaultHtmlUrl;
     }
 }

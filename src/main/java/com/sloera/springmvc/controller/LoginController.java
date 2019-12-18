@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class LoginController extends BaseController {
-    @RequestMapping("/login")
-    @ResponseBody
-    public String login(){
-        return "hello";
-    }
+//    @RequestMapping("/login")
+//    @ResponseBody
+//    public String login(){
+//        return "hello";
+//    }
 }
