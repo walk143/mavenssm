@@ -84,11 +84,11 @@
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml"/>
     </bean>
-    <bean id="slaveSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="masterDataSource"/>
-        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
-        <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml"/>
-    </bean>
+<!--    <bean id="slaveSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="masterDataSource"/>-->
+<!--        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>-->
+<!--        <property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml"/>-->
+<!--    </bean>-->
     <!-- [master:] sql session template -->
     <bean id="masterSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="masterSqlSessionFactory"/>
@@ -98,6 +98,14 @@
     <bean id="slaveSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="slaveSqlSessionFactory"/>
         <constructor-arg index="1" value="BATCH"/>
+    </bean>
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <constructor-arg ref="masterDataSource"/>-->
+<!--    </bean>-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref bean="jdbc_dataSourceOracle" />
+        </property>
     </bean>
 
     <!--&lt;!&ndash; 配置事务管理器 &ndash;&gt;-->

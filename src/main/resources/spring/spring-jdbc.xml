@@ -70,6 +70,14 @@
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
   		<property name="mapperLocations" value="classpath*:mybatis/mappers/**/*.xml" />
 	</bean>
+
+	<bean id="jdbc_dataSourceOracle" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="url" value="${jdbc.master.url}" />
+		<property name="username" value="${jdbc.master.username}" />
+		<property name="password" value="${jdbc.master.password}" />
+		<property name="driverClassName" value="${jdbc.master.driverClassName}" />
+	</bean>
+
     <!-- 事务控制 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="masterDataSource" />

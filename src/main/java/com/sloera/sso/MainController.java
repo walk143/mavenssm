@@ -2,6 +2,9 @@ package com.sloera.sso;
 
 import com.sloera.mng.core.action.BaseController;
 import com.sloera.mng.core.db.Record;
+import com.sloera.person.user.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,14 +15,22 @@ import java.net.URLDecoder;
 
 @Controller
 public class MainController extends BaseController {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @RequestMapping(value = "/main", method = RequestMethod.POST)
     public String home(HttpServletResponse response) {
         try {
             String type = this.getPara("type");
-            String userName = this.getPara("userName");
-            userName = URLDecoder.decode(userName,"UTF-8");
+            String account = this.getPara("userName");
+            account = URLDecoder.decode(account,"UTF-8");
             String password = this.getPara("password");
             password = URLDecoder.decode(password,"UTF-8");
+            Boolean flag = userService.isLegality(account,password);
+            if(!flag)
+                return login(response);
             String query = request.getQueryString();
         } catch (Exception e) {
             logger.error(e);

@@ -16,4 +16,11 @@
         select id, username, account, password, age, sex, email, version from USER_INFO u
         where u.id = #{id}
     </select>
+    <select id="findUser" resultMap="user">
+        select id, username, account, password, age, sex, email, version from USER_INFO u
+        where u.ACCOUNT = #{account} and u.password = #{password}
+        <if test="active != null and active != '' ">
+            and u.active = #{active}
+        </if>
+    </select>
 </mapper>
