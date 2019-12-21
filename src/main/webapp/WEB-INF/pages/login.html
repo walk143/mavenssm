@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8">
         <link href="${root!}/static/js/bootstrap/css/bootstram.min.css">
@@ -28,6 +28,9 @@
                     <div class="col-sm-1">
                         <button type="submit" id="btnLogin" class="btn btn-login">登录</button>
                     </div>
+                    <div class="col-sm-1">
+                        <button type="button" id="btnRegister" class="btn btn-primary">注册</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -46,20 +49,21 @@
                 form.submit();
             }
         })
-        // $("#btnLogin").click(function () {
-        //     console.log("用户登录");
-        //     var data = getData();
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "/main",
-        //         data: data,
-        //         async: false,
-        //         success: function(data){
-        //             console.log("data:"+data);
-        //             alert("login success");
-        //         }
-        //     })
-        // });
+        $("#btnRegister").click(function () {
+            console.log("用户注册");
+            window.location.href = Power.rootPath + "register";
+            // var data = getData();
+            // $.ajax({
+            //     type: "POST",
+            //     url: "/main",
+            //     data: data,
+            //     async: false,
+            //     success: function(data){
+            //         console.log("data:"+data);
+            //         alert("login success");
+            //     }
+            // })
+        });
         function getData(){
             var data = {};
             data.userName = encrypt(encodeURIComponent($("#userName").val()));

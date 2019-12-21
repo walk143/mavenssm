@@ -1,14 +1,18 @@
 package com.sloera.person.user.po;
 
+import java.util.Date;
+
 public class UserBean {
     String id;//主键
     String userName;//用户名
     String account;//账号
     String password;//密码
+    Date birthday;//出生日期
     int age;//年龄
     String sex;//性别
     String email;//邮箱
     int version;//版本号
+    String active;//激活状态
 
     public String getId() {
         return id;
@@ -40,6 +44,14 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public int getAge() {
@@ -74,6 +86,14 @@ public class UserBean {
         this.version = version;
     }
 
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "UserBean{" +
@@ -81,10 +101,12 @@ public class UserBean {
                 ", userName='" + userName + '\'' +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
+                ", birthday=" + birthday +
                 ", age=" + age +
                 ", sex='" + sex + '\'' +
                 ", email='" + email + '\'' +
                 ", version=" + version +
+                ", active='" + active + '\'' +
                 '}';
     }
 }

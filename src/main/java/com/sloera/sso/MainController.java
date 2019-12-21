@@ -57,4 +57,10 @@ public class MainController extends BaseController {
         String defaultHtmlUrl = "index";
         return defaultHtmlUrl;
     }
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(HttpServletResponse response) {
+        Record record = (Record) WebUtils.getSessionAttribute(request, BaseController.USER_TOCKEN);
+        this.setAttr("root",getContextPath(request));
+        return "register";
+    }
 }

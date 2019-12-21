@@ -311,11 +311,11 @@
             <version>1.8.10</version>
         </dependency>
         <!--先借用-->
-        <dependency>
-            <groupId>in-project</groupId>
-            <artifactId>ibatis</artifactId>
-            <version>3.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>in-project</groupId>-->
+<!--            <artifactId>ibatis</artifactId>-->
+<!--            <version>3.2</version>-->
+<!--        </dependency>-->
 
 
 

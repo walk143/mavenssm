@@ -46,11 +46,21 @@ public abstract class BaseController {
         }
     }
 
+    /*
+    * @Description 获得真实url地址。返回结尾带"/"
+    * @param null: 
+    * @return http://localhost:8080/mavenssm_war_exploded
+    * @author liuwangyang
+    * @Date 2019-12-21 14:36
+    */
     public String getContextPath(HttpServletRequest request) {
         String path = request.getContextPath();
         String basePath =
-                request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+                request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
         logger.error("basePath:" + basePath);
         return basePath;
+    }
+    public void setAttr(String key, Object value){
+        this.request.setAttribute(key, value);
     }
 }

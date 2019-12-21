@@ -5,6 +5,7 @@ import com.sloera.demo.bean.Demo;
 import com.sloera.demo.bean.Form;
 import com.sloera.demo.po.TempBean;
 import com.sloera.demo.service.DemoService;
+import com.sloera.mng.core.action.BaseController;
 import com.sloera.mng.core.utils.CTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ import java.util.List;
 @RestController
 //    @Controller
 //    @ResponseBody
-public class DemoController {
+public class DemoController extends BaseController {
     @Autowired
     private DemoService demoService;
 

@@ -25,4 +25,7 @@ public class UserService {
             return false;
 
     }
+    public UserBean findByAccount(String account){
+        return this.userDao.selectOne("com.sloera.person.user.userInfo.findByAccount",account);
+    }
 }

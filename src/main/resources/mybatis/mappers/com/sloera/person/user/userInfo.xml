@@ -12,15 +12,26 @@
         <result column="EMAIL" property="email" />
         <result column="VERSION" property="version" jdbcType="INTEGER"/>
     </resultMap>
-    <select id="findByAccount" resultMap="user">
-        select id, username, account, password, age, sex, email, version from USER_INFO u
+    <insert id="insert">
+        insert into USER_INFO (ID, USERNAME, ACCOUNT, PASSWORD, AGE, SEX, EMAIL, VERSION, ACTIVE, BIRTHDAY)
+        values (
+        #{id,jdbcType=VARCHAR},#{USERNAME,jdbcType=VARCHAR},#{ACCOUNT,jdbcType=VARCHAR},#{PASSWORD,jdbcType=VARCHAR},#{AGE,jdbcType=INTEGER},#{SEX,jdbcType=VARCHAR},#{EMAIL,jdbcType=VARCHAR},#{VERSION,jdbcType=INTEGER},#{ACTIVE,jdbcType=VARCHAR},#{BIRTHDAY,jdbcType=TIMESTAMP},
+        )
+    </insert>
+    <select id="findById" resultMap="user">
+--         select id, username, account, password, age, sex, email, version from USER_INFO u
+        select u.* from USER_INFO u
         where u.id = #{id}
     </select>
     <select id="findUser" resultMap="user">
-        select id, username, account, password, age, sex, email, version from USER_INFO u
+        select u.* from USER_INFO u
         where u.ACCOUNT = #{account} and u.password = #{password}
         <if test="active != null and active != '' ">
             and u.active = #{active}
         </if>
+    </select>
+    <select id="findByAccount" resultMap="user">
+        select u.* from USER_INFO u
+        where u.ACCOUNT = #{account} and u.ACTIVE = '1';
     </select>
 </mapper>
