@@ -15,23 +15,23 @@
     <insert id="insert">
         insert into USER_INFO (ID, USERNAME, ACCOUNT, PASSWORD, AGE, SEX, EMAIL, VERSION, ACTIVE, BIRTHDAY)
         values (
-        #{id,jdbcType=VARCHAR},#{USERNAME,jdbcType=VARCHAR},#{ACCOUNT,jdbcType=VARCHAR},#{PASSWORD,jdbcType=VARCHAR},#{AGE,jdbcType=INTEGER},#{SEX,jdbcType=VARCHAR},#{EMAIL,jdbcType=VARCHAR},#{VERSION,jdbcType=INTEGER},#{ACTIVE,jdbcType=VARCHAR},#{BIRTHDAY,jdbcType=TIMESTAMP},
+        #{id,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{age,jdbcType=INTEGER},#{sex,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{version,jdbcType=INTEGER},#{active,jdbcType=VARCHAR},#{birthday,jdbcType=TIMESTAMP}
         )
     </insert>
     <select id="findById" resultMap="user">
 --         select id, username, account, password, age, sex, email, version from USER_INFO u
         select u.* from USER_INFO u
-        where u.id = #{id}
+        where u.id = #{id,jdbcType=VARCHAR}
     </select>
     <select id="findUser" resultMap="user">
         select u.* from USER_INFO u
-        where u.ACCOUNT = #{account} and u.password = #{password}
+        where u.ACCOUNT = #{account,jdbcType=VARCHAR} and u.password = #{password,jdbcType=VARCHAR}
         <if test="active != null and active != '' ">
-            and u.active = #{active}
+            and u.active = #{active,jdbcType=VARCHAR}
         </if>
     </select>
     <select id="findByAccount" resultMap="user">
         select u.* from USER_INFO u
-        where u.ACCOUNT = #{account} and u.ACTIVE = '1';
+        where u.ACCOUNT = #{account,jdbcType=VARCHAR} and u.ACTIVE = '1'
     </select>
 </mapper>

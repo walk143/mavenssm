@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/person/user")
@@ -29,9 +30,14 @@ public class UserController extends BaseController {
         String sex = this.getPara("sex");
         String email = this.getPara("email");
         String birthday = this.getPara("birthday");
-        UserBean oldUserBean = userService.findByAccount(account);
-        if(null != oldUserBean){
-            return;
+        try {
+            UserBean oldUserBean = userService.findByAccount(account);
+            if(null != oldUserBean){
+                return;
+            }
+        } catch (Exception e){
+            System.err.println(e);
+            logger.error(e);
         }
         UserBean userBean = new UserBean();
         userBean.setId(CTools.getUUID());
@@ -39,10 +45,17 @@ public class UserController extends BaseController {
         userBean.setAccount(account);
         userBean.setPassword(password);
         userBean.setSex(sex);
+        userBean.setAge(1);
         userBean.setEmail(email);
         userBean.setActive("1");
         userBean.setVersion(1);
-        userDao.save("com.sloera.person.user.userInfo.insert",userBean);
+        userBean.setBirthday(new Date());
+        try {
+            userDao.save("com.sloera.person.user.userInfo.insert",userBean);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error(e);
+        }
 
     }
 
