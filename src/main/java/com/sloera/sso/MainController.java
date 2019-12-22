@@ -54,7 +54,7 @@ public class MainController extends BaseController {
         return "login";
     }
     private String defaultHtmlUrl(){
-        String defaultHtmlUrl = "index";
+        String defaultHtmlUrl = "list";
         return defaultHtmlUrl;
     }
     @RequestMapping(value = "/register", method = RequestMethod.GET)
