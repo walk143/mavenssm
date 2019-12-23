@@ -44,11 +44,13 @@ public class UserController extends BaseController {
         try {
             UserBean oldUserBean = userService.findByAccount(account);
             if(null != oldUserBean){
+                this.renderText(response,"已有账号为："+account+"的用户存在");
                 return;
             }
         } catch (Exception e){
             System.err.println(e);
             logger.error(e);
+            this.renderText(response,e.getMessage());
         }
         UserBean userBean = new UserBean();
         userBean.setId(CTools.getUUID());
@@ -62,10 +64,12 @@ public class UserController extends BaseController {
         userBean.setVersion(1);
         userBean.setBirthday(birth);
         try {
-            userDao.save("com.sloera.person.user.userInfo.insert",userBean);
+            int res = userDao.save("com.sloera.person.user.userInfo.insert",userBean);
+            this.renderText(response,String.valueOf(res));
         }catch (Exception e){
             e.printStackTrace();
             logger.error(e);
+            this.renderText(response,e.getMessage());
         }
 
     }

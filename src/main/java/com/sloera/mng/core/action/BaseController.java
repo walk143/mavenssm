@@ -8,6 +8,8 @@ import org.springframework.web.util.JavaScriptUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public abstract class BaseController {
     public Logger logger = Logger.getLogger(this.getClass());
@@ -47,7 +49,7 @@ public abstract class BaseController {
     }
 
     /*
-    * @Description 获得真实url地址。返回结尾带"/"
+    * @Description 获得真实url地址。返回结尾不带"/"
     * @param null: 
     * @return http://localhost:8080/mavenssm_war_exploded
     * @author liuwangyang
@@ -62,5 +64,35 @@ public abstract class BaseController {
     }
     public void setAttr(String key, Object value){
         this.request.setAttribute(key, value);
+    }
+
+    public void renderJson(HttpServletResponse response, String text){
+        this.render(response, "application/json;charset=UTF-8", text);
+    }
+    public void renderText(HttpServletResponse response, String text){
+        this.render(response, "text/plain;charset=UTF-8", text);
+    }
+    public void renderXml(HttpServletResponse response, String text){
+        this.render(response, "text/xml;charset=UTF-8", text);
+    }
+    public void renderHtml(HttpServletResponse response, String text){
+        this.render(response, "text/html;charset=UTF-8", text);
+    }
+    /*
+    * @Description 向前端输出信息
+    * @return
+    * @author liuwangyang
+    * @Date 2019-12-23 15:01
+    */
+    private void render(HttpServletResponse response, String contentType, String text){
+        response.setContentType(contentType);
+        response.setHeader("Pragma","No-cache");
+        response.setHeader("Cache-Control","no-cache");
+        response.setDateHeader("Expires",0L);
+        try {
+            response.getWriter().write(text);
+        } catch (IOException e){
+            logger.error(e.getMessage(),e);
+        }
     }
 }
