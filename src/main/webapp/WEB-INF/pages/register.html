@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <h2 class="text-center">用户注册</h2>
-            <form class="form-horizontal" action="#" id="form" role="form" >
+            <form class="form-horizontal" action="#" id="form" role="form" data-validator-option="{stopOnError:true}">
                 <div class="form-group">
                     <label for="userName" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-10">
@@ -26,8 +26,9 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码" datatype="*1-20" nullmsg="此项不能为空" errormsg="请输入1~20字符">
                     </div>
+                    <div class="Validform_checktip"></div>
                 </div>
                 <div class="form-group">
                     <input type="hidden" id="password2">
@@ -88,6 +89,8 @@
         $(function () {
 
             Power.initIframe("${root!}");
+
+            $("#form").Validform();
 
             $("#birthday").datetimepicker({
                 autoclose: true,
