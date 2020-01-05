@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Record implements Serializable {
-    public Map<String, Object> o0000 = new HashMap();
+    public Map<String, Object> map = new HashMap();
     public Record(){
     }
 
+    public Map<String, Object> getColumns() {
+        return this.map;
+    }
 }
