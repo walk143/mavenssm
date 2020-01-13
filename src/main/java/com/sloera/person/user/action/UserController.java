@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-@RequestMapping(value = "/person/user")
+@RequestMapping(value = "person/user")
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;

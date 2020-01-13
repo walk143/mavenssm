@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-@RequestMapping(value = "/bsp/holiday")
+@RequestMapping(value = "bsp/holiday")
 public class HolidayController extends BaseController {
     @Autowired
     private HolidayService holidayService;
     public HolidayController() {
     }
 
-    @RequestMapping(params = "method=initHoliday", method = RequestMethod.GET)
+    //@RequestMapping(params = "method=initHoliday", method = RequestMethod.GET)
+    @RequestMapping(value = "/initHoliday", method = RequestMethod.GET)
     public void initHoliday(HttpServletRequest request, HttpServletResponse response) {
         String year = this.getPara("year");
         String month = this.getPara("month");
-        Boolean res = holidayService.initHoliday(year, month);
+        int res = holidayService.initHoliday(year, month);
         JSONObject jsonObject = new JSONObject();
-        if (res) {
+        if (res > 0) {
             jsonObject.put("code","200");
         } else {
             jsonObject.put("code", "300");
