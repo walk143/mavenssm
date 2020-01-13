@@ -2,7 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:beans="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
          http://www.springframework.org/schema/context
@@ -89,12 +88,12 @@
     <!-- [master:] sql session template -->
     <bean id="masterSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="masterSqlSessionFactory"/>
-        <constructor-arg index="1" value="BATCH"/>
+        <constructor-arg index="1" value="SIMPLE"/>
     </bean>
     <!-- [slave:] sql session template -->
     <bean id="slaveSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="slaveSqlSessionFactory"/>
-        <constructor-arg index="1" value="BATCH"/>
+        <constructor-arg index="1" value="SIMPLE"/>
     </bean>
 <!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
 <!--        <constructor-arg ref="masterDataSource"/>-->

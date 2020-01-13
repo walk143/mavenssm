@@ -15,7 +15,7 @@ public class BaseWriteDao<E> extends BaseReadDao<E> {
     }
 
     private SqlSession getSession(SqlSessionTemplate var1, boolean var2) {
-        return (SqlSession) (var1 == null ? this.masterSqlSessionTemplate : var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
+        return (SqlSession) (var1 == null ? this.masterSqlSessionTemplate : var1.getSqlSessionFactory().openSession(ExecutorType.SIMPLE, var2));
 //        return (SqlSession) (var1.getSqlSessionFactory().openSession(ExecutorType.BATCH, var2));
     }
 
