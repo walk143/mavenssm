@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         -->
 	 	<!-- [是否 启用  数据中 A_column 自动映射 到 java类中驼峰命名的属性 default:fasle] --> 
 		<setting name="mapUnderscoreToCamelCase" value="false"/>  
-         <!-- 设置驱动等待数据响应的超时数  默认没有设置-->  
+         <!-- 设置驱动等待数据响应的超时秒数  默认没有设置-->
         <setting name="defaultStatementTimeout" value="25000"/>
          <!-- 设置本地缓存范围 session:就会有数据的共享  statement:语句范围 (这样就不会有数据的共享 ) defalut:session -->  
         <setting name="localCacheScope" value="SESSION"/>
