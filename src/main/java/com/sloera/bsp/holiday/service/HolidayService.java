@@ -59,6 +59,7 @@ public class HolidayService {
         int res = -1;
         try {
             res = holidayDao.save("com.sloera.bsp.holiday.insertForeach", list);
+            System.out.println("res:"+res);
         } catch (Exception e) {
             logger.error(e);
         }
