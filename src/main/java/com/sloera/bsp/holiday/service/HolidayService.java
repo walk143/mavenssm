@@ -27,9 +27,19 @@ public class HolidayService {
         if (null == month) {
             start = 0;
             end = 12;
+            try {
+                holidayDao.executeSQL("delete HOLIDAY where year = '" + year + "'");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else { // 只初始化第 month 月
             start = Integer.valueOf(month) - 1;
             end = start + 1;
+            try {
+                holidayDao.executeSQL("delete HOLIDAY where year = '" + year + "' and month = '" + end + "'");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         calendar.set(Calendar.YEAR, Integer.valueOf(year));
         List<HolidayBean> list = new ArrayList<>();

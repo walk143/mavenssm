@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class MapperBaseDao<E> extends BaseWriteDao<E> implements BaseDaoInterface {
-    //@Autowired
-    public JdbcTemplate jdbcTemplate = new JdbcTemplate();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     public MapperBaseDao() {
     }
