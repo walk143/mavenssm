@@ -3,7 +3,8 @@ package com.sloera.bsp.holiday.service;
 import com.sloera.bsp.holiday.dao.HolidayDao;
 import com.sloera.bsp.holiday.po.HolidayBean;
 import com.sloera.mng.core.utils.CTools;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.util.List;
 public class HolidayService {
     @Autowired
     private HolidayDao holidayDao;
-    private Logger logger = Logger.getLogger(HolidayService.class);
+    private Logger logger = LogManager.getLogger(HolidayService.class);
 
     public int initHoliday(String year, String month) {
         int start = 0;
