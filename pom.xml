@@ -13,6 +13,16 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>阿里云仓库</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -308,14 +318,35 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <version>1.2.49</version>
         </dependency>
+
         <!--先借用-->
 <!--        <dependency>-->
 <!--            <groupId>in-project</groupId>-->
 <!--            <artifactId>ibatis</artifactId>-->
 <!--            <version>3.2</version>-->
 <!--        </dependency>-->
+
+        <dependency>
+            <groupId>nation.service</groupId>
+            <artifactId>zzgx</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+
+
+
+
 
 
 
